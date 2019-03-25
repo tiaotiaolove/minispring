@@ -5,4 +5,5 @@ package com.xiaobai.minispring.service.v1;
  * @date 2019/3/21
  */
 public class TestService {
+    public TestService(){}
 }

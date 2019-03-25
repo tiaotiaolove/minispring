@@ -7,8 +7,8 @@ package com.xiaobai.minispring.beans;
  */
 public interface BeanDefinition {
     /**
-     * 获取bean名称
-     * @return bean名称
+     * 获取bean类名
+     * @return bean类名
      */
     String getBeanClassName();
 }
