@@ -16,6 +16,7 @@ public class GenericBeanDefinition implements BeanDefinition {
         this.beanClassName = beanClassName;
     }
 
+    @Override
     public String getBeanClassName() {
         return this.beanClassName;
     }

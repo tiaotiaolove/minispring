@@ -6,12 +6,6 @@ package com.xiaobai.minispring.beans;
  * @date 2019/3/21
  */
 public interface BeanFactory {
-    /**
-     * 根据bean名称获取 bean定义类
-     * @param name bean名称
-     * @return bean定义类
-     */
-    BeanDefinition getBeanDefinition(String name);
 
     /**
      * 根据bean名称获取类
