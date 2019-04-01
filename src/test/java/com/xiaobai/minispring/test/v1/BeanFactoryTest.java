@@ -53,6 +53,9 @@ public class BeanFactoryTest {
         fail("expect BeanCreationException ");
     }
 
+    /**
+     * 测试读取错误的xml路径
+     */
     @Test
     public void testInvalidXML(){
         try{
