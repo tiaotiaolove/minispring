@@ -5,6 +5,7 @@ import com.xiaobai.minispring.beans.factory.BeanCreationException;
 import com.xiaobai.minispring.beans.factory.BeanDefinitionStoreException;
 import com.xiaobai.minispring.beans.factory.support.DefaultBeanFactory;
 import com.xiaobai.minispring.beans.factory.xml.XmlBeanDefinitionReader;
+import com.xiaobai.minispring.core.io.ClassPathResource;
 import com.xiaobai.minispring.service.v1.TestService;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class BeanFactoryTest {
      */
     @Test
     public void testGetBean() {
-        xmlReader.loadBeanDefinitions("test.xml");
+        xmlReader.loadBeanDefinitions(new ClassPathResource("test.xml"));
         BeanDefinition beanDefinition = beanFactory.getBeanDefinition("test");
         assertEquals("com.xiaobai.minispring.service.v1.TestService", beanDefinition.getBeanClassName());
         TestService testService = (TestService)beanFactory.getBean("test");
@@ -44,7 +45,7 @@ public class BeanFactoryTest {
      */
     @Test
     public void testGetInvalidBean() {
-        xmlReader.loadBeanDefinitions("test.xml");
+        xmlReader.loadBeanDefinitions(new ClassPathResource("test.xml"));
         try {
             beanFactory.getBean("invalidBean");
         } catch (BeanCreationException e) {
@@ -59,7 +60,7 @@ public class BeanFactoryTest {
     @Test
     public void testInvalidXML(){
         try{
-            xmlReader.loadBeanDefinitions("xxxx.xml");
+            xmlReader.loadBeanDefinitions(new ClassPathResource("xxxx.xml"));
         }catch(BeanDefinitionStoreException e){
             return;
         }
