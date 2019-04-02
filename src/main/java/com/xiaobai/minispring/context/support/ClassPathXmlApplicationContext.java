@@ -1,8 +1,5 @@
 package com.xiaobai.minispring.context.support;
 
-import com.xiaobai.minispring.beans.factory.support.DefaultBeanFactory;
-import com.xiaobai.minispring.beans.factory.xml.XmlBeanDefinitionReader;
-import com.xiaobai.minispring.context.ApplicationContext;
 import com.xiaobai.minispring.core.io.ClassPathResource;
 import com.xiaobai.minispring.core.io.Resource;
 
@@ -10,18 +7,14 @@ import com.xiaobai.minispring.core.io.Resource;
  * classPathXml应用上下文
  * @author bail
  */
-public class ClassPathXmlApplicationContext implements ApplicationContext {
-	private DefaultBeanFactory factory = null;
+public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 
-	public ClassPathXmlApplicationContext(String configFile) {
-		this.factory = new DefaultBeanFactory();
-		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this.factory);
-		Resource r = new ClassPathResource(configFile);
-		reader.loadBeanDefinitions(r);
+	public ClassPathXmlApplicationContext(String classPathFile) {
+		super(classPathFile);
 	}
 
-	@Override
-	public Object getBean(String name) {
-		return this.factory.getBean(name);
-	}
+    @Override
+    public Resource getResourceByPath(String file) {
+        return new ClassPathResource(file);
+    }
 }
