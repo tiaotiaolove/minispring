@@ -1,8 +1,8 @@
 package com.xiaobai.minispring.beans.factory.support;
 
 import com.xiaobai.minispring.beans.BeanDefinition;
-import com.xiaobai.minispring.beans.BeanFactory;
 import com.xiaobai.minispring.beans.factory.BeanCreationException;
+import com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory;
 import com.xiaobai.minispring.util.ClassUtils;
 
 import java.util.Map;
@@ -13,9 +13,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author bail
  * @date 2019/3/21
  */
-public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry {
+public class DefaultBeanFactory implements ConfigurableBeanFactory, BeanDefinitionRegistry {
     /** 存储多个Bean的定义描述(key为beanId, value为BeadDefinition) */
-    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>();
+    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
+    private ClassLoader beanClassLoader;
 
     public DefaultBeanFactory() {}
 
@@ -40,5 +41,15 @@ public class DefaultBeanFactory implements BeanFactory, BeanDefinitionRegistry {
         } catch (Exception e) {
             throw new BeanCreationException("create bean for "+ bd.getBeanClassName() +" failed",e);
         }
+    }
+
+    @Override
+    public void setBeanClassLoader(ClassLoader beanClassLoader) {
+        this.beanClassLoader = beanClassLoader;
+    }
+
+    @Override
+    public ClassLoader getBeanClassLoader() {
+        return (this.beanClassLoader != null ? this.beanClassLoader : ClassUtils.getDefaultClassLoader());
     }
 }

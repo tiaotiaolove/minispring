@@ -4,6 +4,7 @@ import com.xiaobai.minispring.beans.factory.support.DefaultBeanFactory;
 import com.xiaobai.minispring.beans.factory.xml.XmlBeanDefinitionReader;
 import com.xiaobai.minispring.context.ApplicationContext;
 import com.xiaobai.minispring.core.io.Resource;
+import com.xiaobai.minispring.util.ClassUtils;
 
 /**
  * 典型的模板方法 - 设计模式
@@ -14,7 +15,8 @@ import com.xiaobai.minispring.core.io.Resource;
  * @date 2019/4/2
  */
 public abstract class AbstractApplicationContext implements ApplicationContext {
-    private DefaultBeanFactory factory = null;
+    private DefaultBeanFactory factory;
+    private ClassLoader beanClassLoader;
 
     public AbstractApplicationContext(String file) {
         this.factory = new DefaultBeanFactory();
@@ -22,6 +24,7 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
         // 调用子类重写的方法(这样就可以去除子类中可能出现的重复代码)
         Resource r = getResourceByPath(file);
         reader.loadBeanDefinitions(r);
+        factory.setBeanClassLoader(this.getBeanClassLoader());
     }
 
     /**
@@ -34,5 +37,15 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     @Override
     public Object getBean(String name) {
         return this.factory.getBean(name);
+    }
+
+    @Override
+    public void setBeanClassLoader(ClassLoader beanClassLoader) {
+        this.beanClassLoader = beanClassLoader;
+    }
+
+    @Override
+    public ClassLoader getBeanClassLoader() {
+        return (this.beanClassLoader != null ? this.beanClassLoader : ClassUtils.getDefaultClassLoader());
     }
 }

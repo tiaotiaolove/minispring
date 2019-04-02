@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.xiaobai.minispring.context.support.AbstractApplicationContext</OriginalElement>
+  <nodes>
+    <node x="162.0" y="80.0">com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory</node>
+    <node x="43.0" y="183.0">com.xiaobai.minispring.context.ApplicationContext</node>
+    <node x="0.0" y="286.0">com.xiaobai.minispring.context.support.AbstractApplicationContext</node>
+    <node x="220.0" y="160.0">com.xiaobai.minispring.beans.factory.support.DefaultBeanFactory</node>
+    <node x="199.5" y="0.0">com.xiaobai.minispring.beans.BeanFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory" target="com.xiaobai.minispring.beans.BeanFactory">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.xiaobai.minispring.context.support.AbstractApplicationContext" target="com.xiaobai.minispring.context.ApplicationContext">
+      <point x="0.0" y="-38.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.xiaobai.minispring.beans.factory.support.DefaultBeanFactory" target="com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory">
+      <point x="0.0" y="-38.0" />
+      <point x="396.5" y="135.0" />
+      <point x="307.5" y="135.0" />
+      <point x="48.5" y="15.0" />
+    </edge>
+    <edge source="com.xiaobai.minispring.context.ApplicationContext" target="com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory">
+      <point x="0.0" y="-15.0" />
+      <point x="121.5" y="135.0" />
+      <point x="210.5" y="135.0" />
+      <point x="-48.5" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="287.0" y="287.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
