@@ -15,15 +15,15 @@
       <point x="0.0" y="-15.0" />
       <point x="0.0" y="15.0" />
     </edge>
-    <edge source="com.xiaobai.minispring.context.support.AbstractApplicationContext" target="com.xiaobai.minispring.context.ApplicationContext">
-      <point x="0.0" y="-38.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
     <edge source="com.xiaobai.minispring.beans.factory.support.DefaultBeanFactory" target="com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory">
       <point x="0.0" y="-38.0" />
       <point x="396.5" y="135.0" />
       <point x="307.5" y="135.0" />
       <point x="48.5" y="15.0" />
+    </edge>
+    <edge source="com.xiaobai.minispring.context.support.AbstractApplicationContext" target="com.xiaobai.minispring.context.ApplicationContext">
+      <point x="0.0" y="-38.0" />
+      <point x="0.0" y="15.0" />
     </edge>
     <edge source="com.xiaobai.minispring.context.ApplicationContext" target="com.xiaobai.minispring.beans.factory.config.ConfigurableBeanFactory">
       <point x="0.0" y="-15.0" />
@@ -32,7 +32,7 @@
       <point x="-48.5" y="15.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="287.0" y="287.5" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="287.0" y="256.5" />
   <SelectedNodes />
   <Categories>
     <Category>Fields</Category>

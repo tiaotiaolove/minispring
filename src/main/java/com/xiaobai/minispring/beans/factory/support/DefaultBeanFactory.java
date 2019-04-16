@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author bail
  * @date 2019/3/21
  */
-public class DefaultBeanFactory implements ConfigurableBeanFactory, BeanDefinitionRegistry {
+public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory, BeanDefinitionRegistry {
     /** 存储多个Bean的定义描述(key为beanId, value为BeadDefinition) */
     private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
     private ClassLoader beanClassLoader;
@@ -32,14 +32,27 @@ public class DefaultBeanFactory implements ConfigurableBeanFactory, BeanDefiniti
 
     @Override
     public Object getBean(String beanId) {
-        BeanDefinition bd = beanDefinitionMap.get(beanId);
-        ClassLoader cl = ClassUtils.getDefaultClassLoader();
+        BeanDefinition bd = this.getBeanDefinition(beanId);
+        if(bd.isSingleton()){
+            Object bean = this.getSingleton(beanId);
+            if(bean == null){
+                bean = createBean(bd);
+                this.registerSingleton(beanId, bean);
+            }
+            return bean;
+        }
+        return createBean(bd);
+    }
+
+    private Object createBean(BeanDefinition bd) {
+        ClassLoader cl = this.getBeanClassLoader();
+        String beanClassName = bd.getBeanClassName();
         try {
+            Class<?> clz = cl.loadClass(beanClassName);
             // 通过反射,创建bean的实例
-            Class c = cl.loadClass(bd.getBeanClassName());
-            return c.newInstance();
+            return clz.newInstance();
         } catch (Exception e) {
-            throw new BeanCreationException("create bean for "+ bd.getBeanClassName() +" failed",e);
+            throw new BeanCreationException("create bean for "+ beanClassName +" failed",e);
         }
     }
 

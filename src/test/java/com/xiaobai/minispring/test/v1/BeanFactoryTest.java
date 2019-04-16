@@ -23,7 +23,7 @@ public class BeanFactoryTest {
     XmlBeanDefinitionReader xmlReader = null;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         beanFactory = new DefaultBeanFactory();
         xmlReader = new XmlBeanDefinitionReader(beanFactory);
     }
@@ -35,9 +35,14 @@ public class BeanFactoryTest {
     public void testGetBean() {
         xmlReader.loadBeanDefinitions(new ClassPathResource("test.xml"));
         BeanDefinition beanDefinition = beanFactory.getBeanDefinition("test");
+        assertTrue(beanDefinition.isSingleton());
+        assertFalse(beanDefinition.isPrototype());
+        assertEquals(BeanDefinition.SCOPE_DEFAULT, beanDefinition.getScope());
         assertEquals("com.xiaobai.minispring.service.v1.TestService", beanDefinition.getBeanClassName());
-        TestService testService = (TestService)beanFactory.getBean("test");
+        TestService testService = (TestService) beanFactory.getBean("test");
         assertNotNull(testService);
+        TestService testService2 = (TestService) beanFactory.getBean("test");
+        assertTrue(testService.equals(testService2));
     }
 
     /**
@@ -58,10 +63,10 @@ public class BeanFactoryTest {
      * 测试读取错误的xml路径
      */
     @Test
-    public void testInvalidXML(){
-        try{
+    public void testInvalidXML() {
+        try {
             xmlReader.loadBeanDefinitions(new ClassPathResource("xxxx.xml"));
-        }catch(BeanDefinitionStoreException e){
+        } catch (BeanDefinitionStoreException e) {
             return;
         }
         fail("expect BeanDefinitionStoreException ");
